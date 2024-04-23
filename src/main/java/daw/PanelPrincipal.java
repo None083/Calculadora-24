@@ -6,6 +6,7 @@ package daw;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -30,9 +31,11 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
         // Creamos el panel de botones
         botonera = new PanelBotones();
         // Creamos el área de texto
-        areaTexto = new JTextArea(6, 30);
+        areaTexto = new JTextArea(3, 20);
         areaTexto.setEditable(false);
-        areaTexto.setBackground(Color.white);
+        areaTexto.setBackground(Color.BLACK);
+        areaTexto.setForeground(Color.WHITE);
+        areaTexto.setFont(new Font("Arial", Font.PLAIN, 20));
 
         //Establecemos layout del panel principal
         this.setLayout(new BorderLayout());
@@ -75,9 +78,22 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
 
             String textoBoton = ((JButton) o).getText();
 
+            if (textoPantalla.contains("=")) {
+                textoPantalla = "";
+            }
+
             switch (textoBoton) {
                 case "+":
                     textoPantalla += " + ";
+                    break;
+                case "-":
+                    textoPantalla += " - ";
+                    break;
+                case "*":
+                    textoPantalla += " * ";
+                    break;
+                case "/":
+                    textoPantalla += " / ";
                     break;
                 case "=":
                 try {
@@ -97,15 +113,29 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
         }
     }
 
-    private int calcularResultado(String expresion) throws Exception {
-        String[] numeros = expresion.split(" \\+ ");
-        int resultado = 0;
-        for (String numero : numeros) {
-            resultado += Integer.parseInt(numero.trim());
+    private double calcularResultado(String textoPantalla) throws Exception {
+        String[] numeros = textoPantalla.split(" ");
+        if (numeros.length != 3) {
+            throw new Exception("Syntax Error");
         }
-        return resultado;
+        double num1 = Double.parseDouble(numeros[0]);
+        double num2 = Double.parseDouble(numeros[2]);
+        switch (numeros[1]) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
+                if (num2 == 0) {
+                    throw new Exception("Syntax Error");
+                }
+                return num1 / num2;
+            default:
+                throw new Exception("Syntax Error");
+        }
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

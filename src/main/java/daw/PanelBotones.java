@@ -4,6 +4,8 @@
  */
 package daw;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
@@ -24,6 +26,9 @@ public class PanelBotones extends javax.swing.JPanel {
         // Creación de los botones
         for (int i = 0; i < 10; i++) {
             grupoBotones[i] = new JButton(Integer.toString(i));
+            grupoBotones[i].setBackground(Color.DARK_GRAY);
+            grupoBotones[i].setForeground(Color.WHITE);
+            grupoBotones[i].setFont(new Font("Arial", Font.BOLD, 12));
         }
         grupoBotones[10] = new JButton("+");
         grupoBotones[11] = new JButton("-");
@@ -31,6 +36,12 @@ public class PanelBotones extends javax.swing.JPanel {
         grupoBotones[13] = new JButton("/");
         grupoBotones[14] = new JButton("=");
         grupoBotones[15] = new JButton("C");
+        
+        for (int i = 10; i <= 15; i++) {
+            grupoBotones[i].setBackground(Color.DARK_GRAY);
+            grupoBotones[i].setForeground(Color.MAGENTA);
+            grupoBotones[i].setFont(new Font("Arial", Font.BOLD, 12));
+        }
 
         this.setLayout(new GridLayout(4, 4));
 
