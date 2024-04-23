@@ -19,13 +19,11 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
 
     private PanelBotones botonera;
     private JTextArea areaTexto;
-    private int tipoOperacion;
     private String textoPantalla;
 
     public PanelPrincipal() {
         iniciarComponentes();
         textoPantalla = "";
-        tipoOperacion = -1;
     }
 
     private void iniciarComponentes() {
@@ -75,38 +73,37 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
         // Si es un botón
         if (o instanceof JButton) {
 
-            textoPantalla += ((JButton) o).getText();
-            areaTexto.setText(textoPantalla);
+            String textoBoton = ((JButton) o).getText();
 
-            if (((JButton) o).getText().equals("=")) {
+            switch (textoBoton) {
+                case "+":
+                    textoPantalla += " + ";
+                    break;
+                case "=":
                 try {
-                    if (((JButton) o).getText().equals("+")) {
-                        String[] numeros = textoPantalla.split("\\+=");
-                        int resultado = Integer.parseInt(numeros[0]) + Integer.parseInt(numeros[1]);
-                        textoPantalla += resultado;
-                    }
-//                    if (jLabel1.getText().contains("-")) {
-//                        String[] numeros = textoPantalla.getText().split("-");
-//                        int resultado = Integer.parseInt(numeros[0]) - Integer.parseInt(numeros[1]);
-//                        jLabel1.setText(String.valueOf(resultado));
-//                    }
-//                    if (jLabel1.getText().contains("/")) {
-//                        String[] numeros = jLabel1.getText().split("/");
-//                        int resultado = Integer.parseInt(numeros[0]) / Integer.parseInt(numeros[1]);
-//                        jLabel1.setText(String.valueOf(resultado));
-//                    }
-//                    if (jLabel1.getText().contains("x")) {
-//                        String[] numeros = jLabel1.getText().split("x");
-//                        int resultado = Integer.parseInt(numeros[0]) * Integer.parseInt(numeros[1]);
-//                        jLabel1.setText(String.valueOf(resultado));
-//                    }
-                } catch (NumberFormatException nfe) {
+                    textoPantalla += " = " + calcularResultado(textoPantalla);
+                } catch (Exception e) {
                     textoPantalla = "Syntax Error";
                 }
+                break;
+                case "C":
+                    textoPantalla = "";
+                    break;
+                default:
+                    textoPantalla += textoBoton;
+                    break;
             }
-
+            areaTexto.setText(textoPantalla);
         }
+    }
 
+    private int calcularResultado(String expresion) throws Exception {
+        String[] numeros = expresion.split(" \\+ ");
+        int resultado = 0;
+        for (String numero : numeros) {
+            resultado += Integer.parseInt(numero.trim());
+        }
+        return resultado;
     }
 
 
