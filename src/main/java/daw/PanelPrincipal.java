@@ -85,23 +85,23 @@ public class PanelPrincipal extends javax.swing.JPanel implements ActionListener
                         int resultado = Integer.parseInt(numeros[0]) + Integer.parseInt(numeros[1]);
                         textoPantalla += resultado;
                     }
-                    if (jLabel1.getText().contains("-")) {
-                        String[] numeros = textoPantalla.getText().split("-");
-                        int resultado = Integer.parseInt(numeros[0]) - Integer.parseInt(numeros[1]);
-                        jLabel1.setText(String.valueOf(resultado));
-                    }
-                    if (jLabel1.getText().contains("/")) {
-                        String[] numeros = jLabel1.getText().split("/");
-                        int resultado = Integer.parseInt(numeros[0]) / Integer.parseInt(numeros[1]);
-                        jLabel1.setText(String.valueOf(resultado));
-                    }
-                    if (jLabel1.getText().contains("x")) {
-                        String[] numeros = jLabel1.getText().split("x");
-                        int resultado = Integer.parseInt(numeros[0]) * Integer.parseInt(numeros[1]);
-                        jLabel1.setText(String.valueOf(resultado));
-                    }
+//                    if (jLabel1.getText().contains("-")) {
+//                        String[] numeros = textoPantalla.getText().split("-");
+//                        int resultado = Integer.parseInt(numeros[0]) - Integer.parseInt(numeros[1]);
+//                        jLabel1.setText(String.valueOf(resultado));
+//                    }
+//                    if (jLabel1.getText().contains("/")) {
+//                        String[] numeros = jLabel1.getText().split("/");
+//                        int resultado = Integer.parseInt(numeros[0]) / Integer.parseInt(numeros[1]);
+//                        jLabel1.setText(String.valueOf(resultado));
+//                    }
+//                    if (jLabel1.getText().contains("x")) {
+//                        String[] numeros = jLabel1.getText().split("x");
+//                        int resultado = Integer.parseInt(numeros[0]) * Integer.parseInt(numeros[1]);
+//                        jLabel1.setText(String.valueOf(resultado));
+//                    }
                 } catch (NumberFormatException nfe) {
-                    jLabel1.setText("Syntax Error");
+                    textoPantalla = "Syntax Error";
                 }
             }
 
